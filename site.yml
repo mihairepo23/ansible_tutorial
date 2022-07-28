@@ -17,6 +17,22 @@
       upgrade: dist
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  task:
+    
+  -name: create user
+   tags: always
+   user:
+     name: simone
+     groups: root
+
+  -name: add ssh key for simone
+   tags: allways
+   authorized_keys:
+     user: simone
+     key:"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDiC/BFsiKGNn1ESHRSvKomKzokarr7IAWcAolEF25gl ansible"
   
 - hosts: ubuntu_server
   become: true

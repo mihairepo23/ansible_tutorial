@@ -42,4 +42,19 @@
       update_cache: yes
     when: ansible_distribution == "CentOS"
 
+  - name: start httpd (CentOS)
+    tags: httpd,apache,apache2
+    service:
+      name: httpd
+      state: started
+      enable: yes
+    when ansible-distribution == "CentOS"
 
+  - name: copy default html file
+    tags: apache,apache2,http
+    copy:
+      src: default_site.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644
